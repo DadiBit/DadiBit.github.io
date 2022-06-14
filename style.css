@@ -1,0 +1,132 @@
+:root {
+    --main-light: rgb(240, 120, 120);
+    --main-dark: rgb(180, 60, 60);
+    --light: #dedede;
+    --dark: #343434;
+    --darker: #121212;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: .2em;
+    margin: 0;
+    background-color: var(--darker);
+    color: var(--light);
+}
+
+a {
+    color: var(--main-light);
+}
+
+section {
+    position: sticky;
+    top: 0;
+    background-color: var(--darker);
+    box-shadow: 0 -1em 1em 1em var(--darker);
+    display: flex;
+    width: 100vw;
+    height: 110vh;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    scroll-snap-align: center;
+}
+
+.presentation {
+    z-index: -1;
+}
+
+.knowledge {
+    z-index: 0;
+}
+
+.slide {
+    z-index: 1;
+}
+
+.presentation > div {
+    display: flex;
+    width: 12.5em;
+    height: 4.5em;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 1.5em 2em;
+    border: .3em solid var(--main-light);
+    box-shadow: .6em .6em 0 0 var(--main-dark);
+}
+
+/* see https://css-tricks.com/snippets/css/typewriter-effect/ for an intoduction to typewriters */
+.presentation h1 {
+    overflow: hidden;
+    white-space: nowrap;
+    float: left;
+    margin-top: .2em;
+    margin-bottom: .2em;
+}
+
+.presentation .pre {
+    border-right: 0 solid var(--light);
+    animation: 
+        caret-blink 1s linear 10s infinite,
+        presentation-pre-caret-hide 30s linear .5s infinite,
+        presentation-pre-type-del 30s steps(10) .5s infinite;
+}
+
+@keyframes presentation-pre-caret-hide {
+    /* hack to fake caret changing line; probably there is a better way to do it */
+    from, 30.9%, 39.1%, 89.9%, 99.1%, to {border-right-width: 0;}
+    31%, 35%, 39%, 90%, 95%, 99% {border-right-width: .2em;}
+}
+
+@keyframes presentation-pre-type-del {
+    from, 33%, 37%, 93%, 97%, to {width: 100%;}
+    34.5%, 35.5%, 94.5%, 95.5% {width: 0;}
+}
+
+.presentation .pre::after {
+    content: 'I am';
+    animation:
+        presentation-pre-content 30s steps(1) .5s infinite;
+}
+
+@keyframes presentation-pre-content {
+    0%, 95% {content: 'I am';}
+    35% {content: 'I like';}
+}
+
+.presentation .post {
+    border-right: .2em solid var(--light);
+    animation:
+        caret-blink 1s linear infinite,
+        presentation-post-type-del 3s steps(25) .5s infinite;
+}
+
+@keyframes presentation-post-type-del {
+    from, to {width: 0;}
+    60%, 80% {width: 100%;}
+}
+
+.presentation .post::before {
+    content: '';
+    animation: 
+        presentation-post-content 30s steps(1) .5s infinite;
+}
+
+@keyframes presentation-post-content {
+     0% {content: 'Davide Bassi';}
+    10% {content: 'Italian 🇮🇹';}
+    20% {content: 'DadiBit 🥸';}
+    30% {content: '';}
+    40% {content: 'coding 💻';}
+    50% {content: 'nature 🌳';}
+    60% {content: 'physics 🥼';}
+    70% {content: 'fitness 💪';}
+    80% {content: 'drawing 📐';}
+    90% {content: '';}
+}
+
+@keyframes caret-blink {
+    from, to {border-right-color: transparent;}
+    50% {border-right-color: var(--light);}
+}
